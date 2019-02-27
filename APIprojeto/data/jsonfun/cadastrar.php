@@ -26,6 +26,11 @@ $db = $database->getConnection();
 //Instância da classe de funcionários
 $funcionario = new Funcionarios($db);
 
+//Vamos pegar os dados postados
+//Para pegarmos os dados que o usuário envia
+//usamos o file_get_contents no PHP.
+$data = json_decode(file_get_contents("php://input"));
+
 //Abaixo vamos efetuar uma verificação para saber se todos os campos foram
 //preenchidos.
   if(
@@ -33,8 +38,6 @@ $funcionario = new Funcionarios($db);
     !empty($data->nome)&&
     !empty($data->cpf)&&
     !empty($data->foto)&&
-    !empty($data->idcontato)&&
-    !empty($data->idendereco)&&
     !empty($data->email)&&
     !empty($data->telefone)&&
     !empty($data->celular)&&
@@ -46,12 +49,10 @@ $funcionario = new Funcionarios($db);
     ){
     //Se os campos NÃO estiverem vazios então iremos passar para 
     //efetuar o cadastro no banco.
-    $funcionario->senha = $data->nomeproduto;
+    $funcionario->senha = $data->senha;
     $funcionario->nome = $data->nome;
     $funcionario->cpf = $data->cpf;
     $funcionario->foto = $data->foto;
-    $funcionario->idcontato = $data->idcontato;
-    $funcionario->idendereco = $data->idendereco;
     $funcionario->email = $data->email;
     $funcionario->telefone = $data->telefone;
     $funcionario->celular = $data->celular;
@@ -60,17 +61,19 @@ $funcionario = new Funcionarios($db);
     $funcionario->numero = $data->numero;
     $funcionario->complemento = $data->complemento;
     $funcionario->cep = $data->cep;
-
-    //Depois de passarmos os dadso vamos tentar executar o cadastro no banco.
-    if($funcionario->cadastrar()){
+    
+    $rs = $funcionario->cadastrar();
+    //Depois de passarmos os dados vamos tentar executar o cadastro no banco.
+    if($rs=="Cadastrou"){
         //Iremos retornar ao usuário a mensagem de cadastro realizado
         // com sucesso e o código de status 201 (criado, success).
         http_response_code(201);
         echo json_encode(array("mensagem"=>"Cadastro realizado com sucesso!"));
     }else{
         //Se não for possível realizar o cadastro:
-        http_response_code(400); // Código 400 é Bad request.
-        echo json_encode(array("mansagem"=>"Não foi possível realizar o cadastro!"));
+        http_response_code(503); // 503 é o erro interno do servidor.
+        echo json_encode(array("mensagem"=>"Não foi possível realizar o cadastro!"));
+        //echo "Não foi possível realizar o cadastro!".$db->errorInfo();
     }
 }else{
     // Mensagem para o usuário caso não tenha preenchido todos os campos:

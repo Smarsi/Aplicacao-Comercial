@@ -15,14 +15,12 @@ class funcionarios{
 
  //Abaixo criaremos as variáveis necessárias de acordo com os campos
  //da tabela de contato.
- public $idcontato;
  public $email;
  public $telefone;
  public $celular;
 
  //Abaixo criaremos as variáveis necessárias de acordo com os campos 
  //da tabela de endereço.
-public $idendereco;
 public $endereco;
 public $bairro;
 public $numero;
@@ -41,7 +39,31 @@ public function __construct($db){
 
 public function listar(){
     //Vamos criar a variável que contém o comando de SQL.
-    $query = "Select * from funcionarios";
+    $query = "select idfuncionario,nome,cpf,email,endereco
+    from funcionarios as f
+    inner join contato as c on c.idcontato=f.idcontato
+    inner join endereco as e on f.idendereco=e.idendereco
+    where idfuncionario>0";
+
+    //Vamos preparar e executar efetivamente a consulta nas 
+    //linhas abaixo.
+    //Criando a variável stmt(irá guardar o resultado da consulta).
+$stmt = $this->conexao->prepare($query);
+   
+    $stmt->execute();
+    
+    return $stmt;
+}
+
+// ------------------- LISTAR Completo -------------------
+
+public function listarCompleto(){
+    //Vamos criar a variável que contém o comando de SQL.
+    $query = "select f.*,c.*,e.*
+    from funcionarios as f
+    inner join contato as c on c.idcontato=f.idcontato
+    inner join endereco as e on f.idendereco=e.idendereco
+    where idfuncionario>0";
 
     //Vamos preparar e executar efetivamente a consulta nas 
     //linhas abaixo.
@@ -53,11 +75,12 @@ public function listar(){
     return $stmt;
 }
 
+
 // ------------------- LISTAR pelo ID-------------------
 
 public function listarPorId(){
     //Criando variável para guardar o comando se SQL.
-    $query = "select * from funcionarios where idfuncionario=?";
+    $query = "";
 
     //preparar a execução
     $stmt=$this->conexao->prepare($query);
@@ -90,7 +113,7 @@ public function listarPorId(){
 public function cadastrar(){
 
     //Criando a variável que irá guardar o comando de SQL.
-    $querycont = "Insert into endereco set
+    $queryend = "Insert into endereco set
                     endereco=:en,
                     bairro=:ba,
                     numero=:nm,
@@ -98,7 +121,7 @@ public function cadastrar(){
                     cep=:cep";
 
     //Preparar para executar
-    $stmt = $this->conexao->prepare($queryend);
+    $stmtend = $this->conexao->prepare($queryend);
 
     /*Por questões de segurança para evitar comandos de 
     SQLinject, iremos remover qualquer caractere especial dos campos
@@ -111,27 +134,24 @@ public function cadastrar(){
     $this->cep = htmlspecialchars(strip_tags($this->cep));
 
     //vamos fazer a ligação dos parâmetros enviados com os campos do banco.
-    $stmt->bindParam(":en",$this->endereco);
-    $stmt->binParam(":ba",$this->bairro);
-    $stmt->bindParam(":nm",$this->numero);
-    $stmt->bindParam(":com",$this->complemento);
-    $stmt->binParam(":cep",$this->cep);
+    $stmtend->bindParam(":en",$this->endereco);
+    $stmtend->bindParam(":ba",$this->bairro);
+    $stmtend->bindParam(":nm",$this->numero);
+    $stmtend->bindParam(":com",$this->complemento);
+    $stmtend->bindParam(":cep",$this->cep);
 
-    //Vamos executar a consulta e verificar se o cadatro foi efetuado,
-    //para isso ermos usar um if.
-    if($stmt->execute()){
-        return true;
-        //Criar a variável para armazenar o último id gerado.
-        $idcont = $this->conexao->last_insert_id();
-    }else{
-        return false;
-    }
+    $stmtend->execute();
+    $idend=$this->conexao->lastInsertId(); //PDO::
+
+    //------------------------------------------------------------------------------------------------
 
 
-    $queryend = "Insert into contato set
+    $querycont = "Insert into contato set
                     email=:em,
                     telefone=:tel,
                     celular=:cel";
+
+    $stmtcont = $this->conexao->prepare($querycont);
 
     /*Por questões de segurança para evitar comandos de 
     SQLinject, iremos remover qualquer caractere especial dos campos
@@ -143,21 +163,15 @@ public function cadastrar(){
     $this->celular = htmlspecialchars(strip_tags($this->celular));
 
     //Fazendo o ligamento dos parâmetros
-    $stmt->bindParam(":em",$this->email);
-    $stmt->binParam(":tel",$this->telefone);
-    $stmt->bindParam(":cel",$this->celular);
-
-    //Vamos executar a consulta e verificar se o cadastro foi efetuado,
-    //para isso usaremos um if.
-    if($stmt->is_execute()){
-        return true;
-        //Criar a variável para armazenar o último id gerado.
-        $idend = $this->conexao->last_insert_id();
-
-    }else{
-        return false;
-    }
-
+    $stmtcont->bindParam(":em",$this->email);
+    $stmtcont->bindParam(":tel",$this->telefone);
+    $stmtcont->bindParam(":cel",$this->celular);
+    
+    $stmtcont->execute();
+    $idcont = $this->conexao->lastInsertId();
+    
+   
+    //------------------------------------------------------------------------------------------------
     
     $query = "Insert into funcionarios set
                     senha=:se,
@@ -181,24 +195,31 @@ public function cadastrar(){
     $this->nome = htmlspecialchars(strip_tags($this->nome));
     $this->cpf = htmlspecialchars(strip_tags($this->cpf));
     $this->foto = htmlspecialchars(strip_tags($this->foto));
-    $this->idcontato = htmlspecialchars(strip_tags($this->idcontato));
-    $this->idendereco = htmlspecialchars(strip_tags($this->idendereco));
+    
+    /*
+    As linhas abaixo foram eliminadas do código pois estavam gerando um erro,
+    e impedindo o cadastro do funcionário de acontecer, tanto o contato quanto o
+    endereco eram cadastrados normalmente, porém o mesmo não acontecia com o funcionário.
+    */
+    
+    // $this->idcontato = htmlspecialchars(strip_tags($this->$idcont));
+    // $this->idendereco = htmlspecialchars(strip_tags($this->$idend));
 
-    //Vamos fazer a ligação dos parâmetros entre oque foi enviado com o que 
+    //Vamos fazer a ligação dos parâmetros entre o que foi enviado com o que 
     //está no banco.
 
     $stmt->bindParam(":se",$this->senha);
     $stmt->bindParam(":no",$this->nome);
     $stmt->bindParam(":cpf",$this->cpf);
     $stmt->bindParam(":fo",$this->foto);
-    $stmt->bindParam(":ic",$this->$idcontato);
-    $stmt->bindParam(":ie",$this->$idend);
+    $stmt->bindParam(":ic",$idcont);
+    $stmt->bindParam(":ie",$idend);
 
-    //Iremos fazer if para executar a consulta e verificar se foi cadastrado com sucesso.
+    //Iremos fazer um if para executar a consulta e verificar se foi cadastrado com sucesso.
     if($stmt->execute()){
         return true;
-    } 
-        return false;  
+    }
+    return false;
 }
 }
 ?>
