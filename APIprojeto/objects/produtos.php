@@ -57,7 +57,7 @@ class Produtos{
                 img2=:i2,
                 img3=:i3,
                 img4=:i4,
-                idfornecedor=:f";
+                idfornecedor=:if";
 
             
     // Vamos preparar a execução
@@ -83,14 +83,41 @@ class Produtos{
     $stat->bindParam(":i2",$this->img2);
     $stat->bindParam(":i3",$this->img3);
     $stat->bindParam(":i4",$this->img4);
-    $stat->bindParam(":f",$this->idfornecedor);
+    $stat->bindParam(":if",$this->idfornecedor);
 
     //Vamos verificar se o produto foi cadastrado com sucesso 
 
-    if($stat->execute()){
+    $stat->execute();
+    //Vamos armazenar o IdProduto gerado em uma variável.
+    $idprod = $this->conexao->lastInsertId(); 
+
+    //-------------------------------------------------------------------------------------------------------------
+
+    // Agora iremos usar o idProduto gerado e armazenado na variável acima para efetuarmos o cadastro
+    // de um estoque.
+
+    $queryest = "Insert into estoque set
+                        idproduto=:ip,
+                        quantidade=:qt,
+                        idfornecedor=:f";
+
+    // Vamos preparar a execução
+    $stmtest = $this->conexao->prepare($queryest);
+
+     // Vamos tirar qualquer caractere especial.
+     $this->quantidade = htmlspecialchars(strip_tags($this->quantidade));
+
+     // Vamos fazer a ligação dos parâmetros dos dados enviados com o banco.
+     $stmtest->bindParam(":ip",$idprod);
+     $stmtest->bindParam(":qt",$this->quantidade);
+     $stmtest->bindParam(":f",$this->idfornecedor);
+
+     //Vamos efetuar efetivamente a consulta
+    if($stmtest->execute()){
         return true;
-    }
+    } 
     return false;
-    }
+
+}
 }
 ?>

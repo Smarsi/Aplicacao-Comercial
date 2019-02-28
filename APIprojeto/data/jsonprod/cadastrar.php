@@ -45,7 +45,8 @@ if(
     !empty($data->img2)&&
     !empty($data->img3)&&
     !empty($data->img4)&&
-    !empty($data->idfornecedor)
+    !empty($data->idfornecedor)&&
+    !empty($data->quantidade)
     
 ){
     //Se os dados estão preenchidos entao iremos passar para API
@@ -59,6 +60,7 @@ if(
     $produto->img3 = $data->img3;
     $produto->img4 = $data->img4;
     $produto->idfornecedor = $data->idfornecedor;
+    $produto->quantidade = $data->quantidade;
     //Depois de passarmos os dados vamos tentar executar o cadastro
     if($produto->cadastrar()){
         //Iremos retornar ao usuário a mensagem de cadastro realizado
