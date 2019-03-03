@@ -61,6 +61,7 @@ if(
     $produto->img4 = $data->img4;
     $produto->idfornecedor = $data->idfornecedor;
     $produto->quantidade = $data->quantidade;
+
     //Depois de passarmos os dados vamos tentar executar o cadastro
     if($produto->cadastrar()){
         //Iremos retornar ao usuário a mensagem de cadastro realizado

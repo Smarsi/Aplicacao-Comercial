@@ -75,6 +75,52 @@ public function listarCompleto(){
     return $stmt;
 }
 
+// ------------------- LISTAR pelo CPF-------------------
+public function listarPorCpf(){
+    //Criando a variável que vai armazenar o comando de SQL
+    $query = "select f.*,c.*,e.*
+    from funcionarios as f
+    inner join contato as c on c.idcontato=f.idcontato
+    inner join endereco as e on f.idendereco=e.idendereco
+    where idfuncionario=?"
+
+    //Vamos preparar para executar a consulta no banco de dados.
+    $stmt = $this->conexao->prepare($query);
+
+    //Vamos fazer a ligação dos parâmetros enviados pelo usuário
+    //usando o bindParam
+    $stmt->bindParam(1,$this->cpf);
+
+    //Vamos executar efetivamente a consulta.
+    $stmt->execute();
+
+    // Organizar os dados retornados  da consulta para 
+    // a exibição em formato json
+    // Vamos usar uma variável e um array para associar 
+    //os campos da tabela.
+
+    $row = $stmt->fetch(PDO::FECH_ASSOC);
+     
+    //Vamos organizar no objeto funcionarios (funcionarios.php)
+    //os dados retornados da consulta no banco de dados da tabela
+    //funcionarios.
+
+    $this->idfuncionario = $row['idfuncionario'];
+    $this->senha = $row['senha'];
+    $this->nome = $row['nome'];
+    $this->cpf = $row['cpf'];
+    $this->foto = $row['foto'];
+    $this->idcontato = $row['idcontato'];
+    $this->idendereco = $row['idendereco'];
+    $this->email = $row['email'];
+    $this->telefone = $row['telefone'];
+    $this->celular = $row['celular'];
+    $this->endereco = $row['endereco'];
+    $this->bairro = $row['bairro'];
+    $this->numero = $row['numero'];
+    $this->complemento = $row['complemento'];
+    $this->cep = $row['cep'];
+}
 
 // ------------------- LISTAR pelo ID-------------------
 

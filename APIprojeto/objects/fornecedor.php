@@ -56,7 +56,7 @@ $stmt = $this->conexao->prepare($query);
 // ------------------- LISTAR pelo ID-------------------
 
 public function listarCompleto(){
-    //Criando variável para guardar o comando se SQL.
+    //Criando variável para guardar o comando de SQL.
     $query = "select f.*,c.*,e.*
     from fornecedores as f
     inner join contato as c on c.idcontato=f.idcontato

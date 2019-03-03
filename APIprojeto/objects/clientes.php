@@ -37,11 +37,7 @@ public function __construct($db){
 
 public function listar(){
     //Vamos criar a variável que contém o comando de SQL.
-    $query = "select idfornecedor, razaosocial, cnpj, email, endereco
-    from fornecedores as f
-    inner join contato as c on c.idcontato=f.idcontato
-    inner join endereco as e on f.idendereco=e.idendereco
-    where idfornecedor>0";
+    $query = "select * from clientes";
 
     //Vamos preparar e executar efetivamente a consulta nas 
     //linhas abaixo.
@@ -58,10 +54,10 @@ $stmt = $this->conexao->prepare($query);
 public function listarCompleto(){
     //Criando variável para guardar o comando se SQL.
     $query = "select f.*,c.*,e.*
-    from fornecedores as f
+    from clientes as f
     inner join contato as c on c.idcontato=f.idcontato
     inner join endereco as e on f.idendereco=e.idendereco
-    where idfornecedor>0";
+    where idcliente>0";
 
     //preparar a execução
     $stmt=$this->conexao->prepare($query);
