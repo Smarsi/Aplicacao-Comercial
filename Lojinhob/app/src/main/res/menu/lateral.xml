@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/principal">
+        <item android:id="@+id/perfil" android:title="Perfil" android:icon="@drawable/perfil"/>
+        <item android:id="@+id/categorias" android:title="Categorias" android:icon="@drawable/ult_compras" />
+
+
+    </group>
+
+    <group android:id="@+id/politicas">
+        <item android:id="@+id/regulamento" android:title="Regulamento" android:icon="@drawable/regulamento"/>
+        <item android:id="@+id/privacidade" android:title="Politicas de Privacidade" android:icon="@drawable/politica"/>
+        <item android:id="@+id/cadastro" android:title="Cadastro Cliente" android:icon="@drawable/cadastro"/>
+    </group>
+
+    <group android:id="@+id/logout">
+        <item android:id="@+id/carrinho" android:title="Carrinho" android:icon="@drawable/carrinho"/>
+        <item android:id="@+id/sair" android:title="Sair" android:icon="@drawable/exit"/>
+    </group>
+</menu>
