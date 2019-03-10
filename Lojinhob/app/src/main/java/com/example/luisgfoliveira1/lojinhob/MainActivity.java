@@ -1,6 +1,8 @@
 package com.example.luisgfoliveira1.lojinhob;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,8 +15,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.example.luisgfoliveira1.lojinhob.Adapter.ProdutosAdapter;
+import com.example.luisgfoliveira1.lojinhob.chamadaRetrofit.Utilitario;
+import com.example.luisgfoliveira1.lojinhob.models.ListaProduto;
+import com.example.luisgfoliveira1.lojinhob.models.Produto;
+import com.example.luisgfoliveira1.lojinhob.servico.ServicoProduto;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 
+
     ListView listView;
-    ArrayList<Produtos> produtosLista;
+    ArrayList<Produto> produtosLista;
     ProdutosAdapter adapter;
 
     String idProduto, nomeProduto, descricao;
@@ -38,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        listView = (ListView) findViewById(R.id.listView);
-        produtosLista = new ArrayList<>();
 
+        listView =  findViewById(R.id.listView);
+        produtosLista = new ArrayList<>();
 
         exibirDados();
 
@@ -49,26 +63,24 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent detalhes = new Intent(MainActivity.this, Detalhes.class);
-                detalhes.putExtra("idProduto",produtosLista.get(position).getIdProduto());
+                detalhes.putExtra("idProduto", produtosLista.get(position).getIdProduto());
                 detalhes.putExtra("nomeProduto",produtosLista.get(position).getNomeProduto());
                 detalhes.putExtra("descricaoProduto",produtosLista.get(position).getDescricao());
-                detalhes
+                detalhes.putExtra("categoria",produtosLista.get(position).getCategoria());
                 detalhes.putExtra("precoProduto",produtosLista.get(position).getPreco());
                 detalhes.putExtra("imagem1",produtosLista.get(position).getImg1());
                 detalhes.putExtra("imagem2",produtosLista.get(position).getImg2());
                 detalhes.putExtra("imagem3",produtosLista.get(position).getImg3());
                 detalhes.putExtra("imagem4",produtosLista.get(position).getImg4());
 
+
                 startActivity(detalhes);
-
-
-
             }
         });
 
         drawerLayout = findViewById(R.id.telaInicial);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,
+        ActionBarDrawerToggle toggle =
+                new ActionBarDrawerToggle(this,drawerLayout,toolbar,
                 R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -113,16 +125,45 @@ public class MainActivity extends AppCompatActivity {
                     break;
                     default:
                         break;
-                        }
-                        drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
+    }
 
+    private void exibirDados() {
+        final ProgressDialog dialog;
 
+        dialog = new ProgressDialog(MainActivity.this);
+        dialog.setTitle("Buscando Dados");
+        dialog.setMessage("Exibição de dados do json");
+        dialog.show();
 
+        ServicoProduto sp = Utilitario.obterProdutos();
+        Call<ListaProduto> call = sp.getTodosProdutos();
 
+        call.enqueue(new Callback<ListaProduto>() {
+            @Override
+            public void onResponse(Call<ListaProduto> call, Response<ListaProduto> response) {
 
+                dialog.dismiss();//Efeito carregando
 
+                if (response.isSuccessful()) {
+                    produtosLista = response.body().getLstProduto();
+                    adapter = new ProdutosAdapter(getApplicationContext(), produtosLista);
+                    listView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Erro -> " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ListaProduto> call, Throwable t) {
+
+                Toast.makeText(getApplicationContext(), "Erro ->" + t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 }

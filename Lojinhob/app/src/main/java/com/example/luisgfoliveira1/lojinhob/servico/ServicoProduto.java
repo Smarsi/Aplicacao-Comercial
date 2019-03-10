@@ -12,12 +12,13 @@ import retrofit2.http.POST;
 
 public interface ServicoProduto {
 
-    @GET("jsonpr/listar.php")
+    @GET("jsonprod/listar.php")
     Call<List<Produtos>> getProdutos();
 
-    @GET("jsonpr/listar.php")
+    @GET("jsonprod/listar.php")
     Call<ListaProduto> getTodosProdutos();
 
-    @POST("jsonpr/cadastrar.php")
+    @POST("jsonprod/cadastrar.php")
     Call<Produtos> addProdutos(@Body Produtos produtos);
+
 }

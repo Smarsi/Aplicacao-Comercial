@@ -47,7 +47,7 @@
             app:layout_constraintVertical_bias="0.982" />
     </android.support.constraint.ConstraintLayout>
 
-  <!--  <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar"/>
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -57,5 +57,5 @@
         android:layout_gravity="start"
         android:layout_marginTop="55dp"
         />
--->
+
 </android.support.v4.widget.DrawerLayout>

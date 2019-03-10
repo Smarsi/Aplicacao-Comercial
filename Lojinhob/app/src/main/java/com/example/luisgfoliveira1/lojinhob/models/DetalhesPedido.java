@@ -20,19 +20,14 @@ public class DetalhesPedido {
     @Expose
     private int quantidade;
 
-    @SerializedName("categoria")
-    @Expose
-    private int categoria;
-
     public DetalhesPedido() {
     }
 
-    public DetalhesPedido(int idDetalhesPedido, int idPedido, int idProduto, int quantidade, int categoria) {
+    public DetalhesPedido(int idDetalhesPedido, int idPedido, int idProduto, int quantidade) {
         this.idDetalhesPedido = idDetalhesPedido;
         this.idPedido = idPedido;
         this.idProduto = idProduto;
         this.quantidade = quantidade;
-        this.categoria = categoria;
     }
 
     public int getIdDetalhesPedido() {
@@ -66,6 +61,5 @@ public class DetalhesPedido {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    
-
 }
+

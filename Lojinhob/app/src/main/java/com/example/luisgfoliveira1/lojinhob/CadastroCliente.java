@@ -21,8 +21,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.luisgfoliveira1.lojinhob.chamadaRetrofit.Utilitario;
-import com.example.luisgfoliveira1.lojinhob.models.Funcionarios;
-import com.example.luisgfoliveira1.lojinhob.servico.ServicoFuncionarios;
+import com.example.luisgfoliveira1.lojinhob.models.Clientes;
+import com.example.luisgfoliveira1.lojinhob.servico.ServicoClientes;
+
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -37,10 +38,10 @@ public class CadastroCliente extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 
-    ServicoFuncionarios su;
-    EditText cadEmail,  cadNome, cadcpf, cadTelefone, cadCelular, cadEndereco, cadNumeroEnd, cadCep, cadBairro, cadCompplemento;
+    ServicoClientes sc;
+    EditText cadEmail, cadNome, cadcpf, cadTelefone, cadCelular,
+            cadEndereco, cadNumeroEnd, cadCep, cadBairro, cadCompplemento;
     Button btnCadCadastro;
-
 
 
     @Override
@@ -51,81 +52,10 @@ public class CadastroCliente extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         drawerLayout = findViewById(R.id.telaCadastro);
-
-          /*
-        Fazer o vinculo dos elementos XML com os controles em java
-
-         */
-        cadNome = findViewById(R.id.cadNome);
-        cadEmail = findViewById(R.id.cadEmail);
-        cadcpf = findViewById(R.id.cadCpf);
-        cadTelefone = findViewById(R.id.cadTelefone);
-        cadEndereco = findViewById(R.id.cadEndereco);
-        cadNumeroEnd = findViewById(R.id.cadNumeroEnd);
-        cadBairro = findViewById(R.id.cadBairro);
-        cadCompplemento = findViewById(R.id.cadComplemento);
-        btnCadCadastro = findViewById(R.id.btncadCadastrar);
-
-        su = Utilitario.obterFuncionario();
-
-        btnCadCadastro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Funcionarios us = new Funcionarios();
-                    us.setEmail(cadEmail.getText().toString());
-                    us.setNome(cadNome.getText().toString());
-                    us.setCpf(cadcpf.getText().toString());
-                    us.setTelefone(cadTelefone.getText().toString());
-                    us.setEndereco(cadEndereco.getText().toString());
-                    us.setNumeroEndereco(cadNumeroEnd.getText().toString());
-                    us.setCep(cadCep.getText().toString());
-                    us.setBairro(cadBairro.getText().toString());
-                    us.setComplemento(cadCompplemento.getText().toString());
-                    cadastroFuncionario(us);
-                    //Limpar as caixas
-                    cadEmail.setText("");
-                    cadNome.setText("");
-                    cadcpf.setText("");
-                    cadTelefone.setText("");
-                    cadEndereco.setText("");
-                    cadNumeroEnd.setText("");
-                    cadBairro.setText("");
-                    cadCep.setText("");
-                    cadCompplemento.setText("");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-
-
-
-    public void cadastroFuncionario(Funcionarios us){
-        Call<Funcionarios> call = su.addFuncionarios(us);
-        call.enqueue(new Callback<Funcionarios>() {
-            @Override
-            public void onResponse(Call<Funcionarios> call, Response<Funcionarios> response) {
-                if(response.isSuccessful()){
-                    Toast.makeText(CadastroCliente.this,"Cadastrou",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Log.e("Erro: ","Não foi possível cadastrar. "+response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Funcionarios> call, Throwable t) {
-                Log.e("Erro: ",t.getMessage());
-            }
-        });
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,
-                R.string.open_drawer, R.string.close_drawer);
+        ActionBarDrawerToggle toggle =
+                new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                        R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -140,8 +70,8 @@ public class CadastroCliente extends AppCompatActivity {
                         startActivity(per);
                         break;
                     }
-                    case R.id.categorias:{
-                        Intent cat = new Intent(CadastroCliente.this,Categoria.class);
+                    case R.id.categorias: {
+                        Intent cat = new Intent(CadastroCliente.this, Categoria.class);
                         startActivity(cat);
                         break;
                     }
@@ -161,10 +91,11 @@ public class CadastroCliente extends AppCompatActivity {
                         startActivity(car);
                         break;
                     }
-                    case R.id.cadastro:{
+                    case R.id.cadastro: {
                         Intent cad = new Intent(CadastroCliente.this, MainActivity.class);
                         startActivity(cad);
                     }
+
 
                     break;
                     default:
@@ -173,12 +104,83 @@ public class CadastroCliente extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
+
         });
 
+
+
+          /*
+        Fazer o vinculo dos elementos XML com os controles em java
+
+         */
+        cadNome = findViewById(R.id.cadNome);
+        cadEmail = findViewById(R.id.cadEmail);
+        cadcpf = findViewById(R.id.cadCpf);
+        cadTelefone = findViewById(R.id.cadTelefone);
+        cadCelular = findViewById(R.id.cadCelular);
+        cadEndereco = findViewById(R.id.cadEndereco);
+        cadNumeroEnd = findViewById(R.id.cadNumeroEnd);
+        cadBairro = findViewById(R.id.cadBairro);
+        cadCompplemento = findViewById(R.id.cadComplemento);
+        btnCadCadastro = findViewById(R.id.btncadCadastrar);
+
+        sc = Utilitario.obterClientes();
+
+        btnCadCadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Clientes us = new Clientes();
+                    us.setEmail(cadEmail.getText().toString());
+                    us.setNome(cadNome.getText().toString());
+                    us.setCpf(cadcpf.getText().toString());
+                    us.setTelefone(cadTelefone.getText().toString());
+                    us.setCelular(cadCelular.getText().toString());
+                    us.setEndereco(cadEndereco.getText().toString());
+                    us.setNumeroEndereco(cadNumeroEnd.getText().toString());
+                    us.setCep(cadCep.getText().toString());
+                    us.setBairro(cadBairro.getText().toString());
+                    us.setComplemento(cadCompplemento.getText().toString());
+                    cadastrarCliente(us);
+                    //Limpar as caixas
+                    cadEmail.setText("");
+                    cadNome.setText("");
+                    cadcpf.setText("");
+                    cadTelefone.setText("");
+                    cadCelular.setText("");
+                    cadEndereco.setText("");
+                    cadNumeroEnd.setText("");
+                    cadBairro.setText("");
+                    cadCep.setText("");
+                    cadCompplemento.setText("");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    public void cadastrarCliente(Clientes us) {
+        Call<Clientes> call = sc.addClientes(us);
+        call.enqueue(new Callback<Clientes>() {
+            @Override
+            public void onResponse(Call<Clientes> call, Response<Clientes> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(CadastroCliente.this, "Cadastrou", Toast.LENGTH_LONG).show();
+                } else {
+                    Log.e("Erro: ", "Não foi possível cadastrar. " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Clientes> call, Throwable t) {
+                Log.e("Erro: ", t.getMessage());
+            }
+        });
 
 
 
 
     }
 }
-

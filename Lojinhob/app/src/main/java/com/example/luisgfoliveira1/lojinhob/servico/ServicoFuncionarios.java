@@ -16,14 +16,14 @@ public interface ServicoFuncionarios {
     @GET("jsonfun/listar.php")
     Call<List<Funcionarios>> getFuncionarios();
 
-    @POST("jsoncli/cadastrar.php")
+    @POST("jsonfun/cadastrar.php")
     Call<Funcionarios> addFuncionarios(@Body Funcionarios funcionarios);
 
     @POST("jsonfun/login.php")
     Call<Funcionarios> login(@Body Funcionarios usuarios);
 
 
-    @PUT("jsonus/")
+    @PUT("jsonfun/")
     Call<Funcionarios> upFuncionarios(@Path("id") int id, @Body Funcionarios funcionarios);
 
 }

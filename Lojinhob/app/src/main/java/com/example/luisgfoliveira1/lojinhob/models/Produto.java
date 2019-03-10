@@ -20,7 +20,6 @@ public class Produto {
     @Expose
     private String categoria;
 
-
     @SerializedName("preco")
     @Expose
     private double preco;
@@ -80,7 +79,7 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public String getCategoria() {return  categoria; }
+    public String getCategoria() { return categoria; }
 
     public void setCategoria(String categoria) { this.categoria = categoria; }
 
@@ -93,7 +92,7 @@ public class Produto {
     }
 
     public String getImg1() {
-        return "http://www.edilsonsilva.net/apcomercial/data/jsonpr/"+img1;
+        return img1;
     }
 
     public void setImg1(String img1) {
@@ -101,7 +100,7 @@ public class Produto {
     }
 
     public String getImg2() {
-        return "http://www.edilsonsilva.net/apcomercial/data/jsonpr/"+img2;
+        return img2;
     }
 
     public void setImg2(String img2) {
@@ -109,7 +108,7 @@ public class Produto {
     }
 
     public String getImg3() {
-        return "http://www.edilsonsilva.net/apcomercial/data/jsonpr/"+img3;
+        return img3;
     }
 
     public void setImg3(String img3) {
@@ -117,7 +116,7 @@ public class Produto {
     }
 
     public String getImg4() {
-        return "http://www.edilsonsilva.net/apcomercial/data/jsonpr/"+img4;
+        return img4;
     }
 
     public void setImg4(String img4) {

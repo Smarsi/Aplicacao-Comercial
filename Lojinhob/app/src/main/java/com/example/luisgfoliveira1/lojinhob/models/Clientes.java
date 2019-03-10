@@ -3,12 +3,12 @@ package com.example.luisgfoliveira1.lojinhob.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Funcionarios {
+public class Clientes {
 
 
-    @SerializedName("idFuncionario")
+    @SerializedName("idCliente")
     @Expose
-    private int idFuncionario;
+    private int idCliente;
 
     @SerializedName("email")
     @Expose
@@ -17,10 +17,6 @@ public class Funcionarios {
     @SerializedName("cpf")
     @Expose
     private String cpf;
-
-    @SerializedName("senha")
-    @Expose
-    private String senha;
 
     @SerializedName("nome")
     @Expose
@@ -58,11 +54,10 @@ public class Funcionarios {
     @Expose
     private String foto;
 
-    public Funcionarios (int idFuncionario, String email, String senha, String nome, String cpf, String telefone, String celular, String foto, String endereco,
-                         String numeroEndereco, String cep, String bairro, String complemento){
-        this.idFuncionario = idFuncionario;
+    public Clientes (int idCliente, String nome, String cpf, String telefone, String celular, String foto, String endereco,
+                         String numeroEndereco, String cep, String bairro, String complemento, String email){
+        this.idCliente = idCliente;
         this.email = email;
-        this.senha = senha;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -74,23 +69,15 @@ public class Funcionarios {
         this.bairro = bairro;
         this.complemento = complemento;
     }
-    public Funcionarios(){}
+    public Clientes(){}
 
 
-    public int getIdFuncionario() {
-        return idFuncionario;
+    public int getidCliente() {
+        return idCliente;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setidCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getNome() {

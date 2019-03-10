@@ -16,11 +16,10 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/txtPerEmail"
+            android:id="@+id/PerEmail"
             android:layout_width="205dp"
             android:layout_height="37dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text=" E-mail"
@@ -50,14 +49,14 @@
             app:layout_constraintVertical_bias="0.944" />
 
         <TextView
-            android:id="@+id/txtPerIdUsuario"
+            android:id="@+id/PerIdFuncionario"
             android:layout_width="205dp"
             android:layout_height="37dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text=" Id Usuario"
+            android:text=" Id Funcionario"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +66,7 @@
             app:layout_constraintVertical_bias="0.715" />
 
         <TextView
-            android:id="@+id/txtPerCpf"
+            android:id="@+id/PerCpf"
             android:layout_width="205dp"
             android:layout_height="37dp"
             android:layout_marginStart="8dp"
@@ -84,7 +83,7 @@
             app:layout_constraintVertical_bias="0.536" />
 
         <TextView
-            android:id="@+id/txtPerNome"
+            android:id="@+id/PerNome"
             android:layout_width="205dp"
             android:layout_height="37dp"
             android:layout_marginStart="8dp"
