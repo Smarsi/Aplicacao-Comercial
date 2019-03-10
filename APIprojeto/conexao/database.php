@@ -15,7 +15,7 @@ class Database{
         //Tente estabelecer uma conexao com os seguintes dados, caso não seja possível
         //exiba a mensagem abaixo e mostre o erro.
         try{
-        $conexao = new PDO("mysql:host=localhost;port=3306; dbname=lojinho","root","");
+        $conexao = new PDO("mysql:host=localhost;port=3307; dbname=lojinho","root","");
         }
         catch(PDOException $ex){
             echo "Erro ao tentar estabelecer a conexão com o banco".$ex->getMessage();

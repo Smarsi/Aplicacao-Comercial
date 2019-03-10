@@ -24,7 +24,10 @@ $database = new Database();
 $db = $database->getConnection();
 
 //Instância da classe de produtos
+
 $detalhes = new Detalhes($db);
+
+// Abaixo estamos criando o Array para armazenar todos os dados enviados.
 $valor["dados"]=array();
 //Vamos pegar os dados postados
 //Para pegarmos os dados que o usuário envia
@@ -36,26 +39,40 @@ $data = json_decode(file_get_contents("php://input"));
 // Caso ele tenha preenchido todos os campos vamos cadastrar,
 // caso contrário iremos exibir uma mensagem de erro.
 
-if(
-    !empty($data->idpedido)&&
-    !empty($data->idproduto)&&
-    !empty($data->quantidade)    
-){
+// if(
+    // !empty($data->idfuncionario)
+
+// ){
     //Se os dados estão preenchidos entao iremos passar para API
     //efeturar o cadastro no banco.
     
-    http_response_code(200);
-    echo json_encode(array($valor));
-}
-http_response_code(200);
+    //Criando um array
+    $rs = array();
 
-array_push($valor["dados"],$data);
-for($i = 0; $i < sizeof($data); $i++){
-     echo json_encode($valor['dados'][0][$i]);
-   
-}
+    array_push($valor["dados"],$data);
+
+    for($i = 0; $i < sizeof($data); $i++){
+        array_push($rs,$valor['dados'][0][$i]);
+        //  $valor = $detalhes->cadastrar(); (Testes)
+    }
+    //echo json_encode($rs); (Testes)
+    $detalhes->cadastrar($rs);
+    http_response_code(200);
+// } else{
+    // Mensagem para o usuário caso não tenha preenchido todos os campos:
+    // http_response_code(400); //Bad request.
+    // echo json_encode(array("mensagem"=>"Preencha todos os campos para efetuar o cadastro!"));
+// }
+
+
+
+
+
+
+//As linhas abaixos estão comentadas pois foram usados para *TESTES*.
+
 //echo json_encode($valor['dados'][0]);
-//echo json_encode($valor['dados'][0][0]);
-//echo json_encode(array("mensagem"=>sizeof($data)));
-return $valor;
+// echo json_encode($valor['dados'][0][0]);
+// echo json_encode(array("mensagem"=>sizeof($data)));
+//$detalhes->cadastrar($valor['dados'][0]);
 ?>

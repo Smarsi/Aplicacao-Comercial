@@ -82,7 +82,7 @@ public function listarPorCpf(){
     from funcionarios as f
     inner join contato as c on c.idcontato=f.idcontato
     inner join endereco as e on f.idendereco=e.idendereco
-    where idfuncionario=?"
+    where cpf=?";
 
     //Vamos preparar para executar a consulta no banco de dados.
     $stmt = $this->conexao->prepare($query);
@@ -99,27 +99,27 @@ public function listarPorCpf(){
     // Vamos usar uma variável e um array para associar 
     //os campos da tabela.
 
-    $row = $stmt->fetch(PDO::FECH_ASSOC);
+    $linha = $stmt->fetch(PDO::FETCH_ASSOC);
      
     //Vamos organizar no objeto funcionarios (funcionarios.php)
     //os dados retornados da consulta no banco de dados da tabela
     //funcionarios.
 
-    $this->idfuncionario = $row['idfuncionario'];
-    $this->senha = $row['senha'];
-    $this->nome = $row['nome'];
-    $this->cpf = $row['cpf'];
-    $this->foto = $row['foto'];
-    $this->idcontato = $row['idcontato'];
-    $this->idendereco = $row['idendereco'];
-    $this->email = $row['email'];
-    $this->telefone = $row['telefone'];
-    $this->celular = $row['celular'];
-    $this->endereco = $row['endereco'];
-    $this->bairro = $row['bairro'];
-    $this->numero = $row['numero'];
-    $this->complemento = $row['complemento'];
-    $this->cep = $row['cep'];
+    $this->idfuncionario = $linha['idfuncionario'];
+    $this->senha = $linha['senha'];
+    $this->nome = $linha['nome'];
+    $this->cpf = $linha['cpf'];
+    $this->foto = $linha['foto'];
+    $this->idcontato = $linha['idcontato'];
+    $this->idendereco = $linha['idendereco'];
+    $this->email = $linha['email'];
+    $this->telefone = $linha['telefone'];
+    $this->celular = $linha['celular'];
+    $this->endereco = $linha['endereco'];
+    $this->bairro = $linha['bairro'];
+    $this->numero = $linha['numero'];
+    $this->complemento = $linha['complemento'];
+    $this->cep = $linha['cep'];
 }
 
 // ------------------- LISTAR pelo ID-------------------
@@ -267,5 +267,61 @@ public function cadastrar(){
     }
     return false;
 }
+
+
+    //Abaixo iremos criar a função que é responsável pelo login do funcionário no app
+    //------------------------------------LOGAR
+
+    public function Logar(){
+
+        /*
+        Abaixo iremos fazer a verificação para procurar um funcionário no 
+        banco de dados por meio de seu cpf e senha. Quando encontrado retornaremos 
+        a mensagem de logado, caso nao seja encontrado retornaremos uma mensagem
+        dizendo que nao foi possível logar(cpf ou senha incorretos).
+        */
+
+        //Abaixo criaremos a variável que irá armazenar o comando de SQL.
+        $query = "select * from funcionarios where cpf=? and senha=?";
+
+        //Vamos preparar a consulta 
+        $stmt = $this->conexao->prepare($query);
+
+        /*
+        Na query acima foram passados 2 parâmetros para o select. Um para o email e
+        o outro para o campo senha. Ambos são representados pelo ponto de 
+        interrogação(?).
+        Para fazer a passagem dos dados aos parâmetros estamos declarando abaixo o objeto
+        stmt(statement), chamando a função de ligação bindParam para que faça a ligação
+        do parâmetro(?) com os dados do usuário(email e senha).
+        */
+
+        $stmt->bindParam(1,$this->cpf);
+
+        $stmt->bindParam(2,$this->senha);
+
+        //Vamos executar efetivamente a consulta no banco de dados.
+        $stmt->execute();
+
+        //Vamos associar os dados enviados com os campos do banco de dados.
+        //Vamos usar um array.
+        $raw = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //Organizar os dados retornados da tabela de funcionarios do banco de 
+        //dados dentro desse arquivo (funcionarios.php).
+
+        $this->idfuncionario = $raw['idfuncionario'];
+        $this->senha = $raw['senha'];
+        $this->nome = $raw['nome'];
+        $this->cpf = $raw['cpf'];
+        $this->foto = $raw['foto'];
+    
+        // Após logar iremos retornar os dados do funcionário que efetuou o login.
+        //return funcionarios;
+
+    }
+
+
+
 }
 ?>
