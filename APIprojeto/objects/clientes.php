@@ -169,11 +169,80 @@ public function cadastrar(){
     $stmt->bindParam(":ic",$idcont);
     $stmt->bindParam(":ie",$idend);
 
+    echo json_encode($this);
+
     //Iremos fazer um if para executar a consulta e verificar se foi cadastrado com sucesso.
     if($stmt->execute()){
         return true;
     }
     return false;
 }
+
+
+// ------------------- ATUALIZAR -------------------
+
+public function Atualizar(){
+//Vamos criar a variável que armazena o comando de SQL.
+$query = "update endereco as e 
+inner join clientes as f on f.idendereco = e.idendereco
+inner join contato as c on f.idcontato = c.idcontato
+                   set 
+                   e.endereco=:en,
+                   e.bairro=:ba,
+                   e.numero=:nu,
+                   e.complemento=:com,
+                   e.cep=:cep,
+                   c.email=:em,
+                   c.telefone=:tel,
+                   c.celular=:cel,
+                   f.nome=:se,
+                   f.cpf=:no
+                   where f.idcliente=:idcliente";
+
+//Vamos preparar para a execução do comando
+$stmt = $this->conexao->prepare($query);
+
+//Vamos usar uma função para retirar 
+//todos os caracteres especiais vindos de 
+//uma página html.
+//Isso fará com que você evite a execução
+//de comandos maliciosos no banco de dados
+//comandos de sqlinject
+$this->endereco = htmlspecialchars(strip_tags($this->endereco));
+$this->bairro = htmlspecialchars(strip_tags($this->bairro));
+$this->numero = htmlspecialchars(strip_tags($this->numero));
+$this->complemento = htmlspecialchars(strip_tags($this->complemento));
+$this->cep = htmlspecialchars(strip_tags($this->cep));
+$this->email = htmlspecialchars(strip_tags($this->email));
+$this->telefone = htmlspecialchars(strip_tags($this->telefone));
+$this->celular = htmlspecialchars(strip_tags($this->celular));
+$this->nome = htmlspecialchars(strip_tags($this->nome));
+$this->cpf = htmlspecialchars(strip_tags($this->cpf));
+
+//Vamos fazer um bindParam(ligção de parâmetros) entre os dados
+        //enviados pelo usuario no navegado ou smartphone para o banco
+        //de dados
+        $stmt->bindParam(":en",$this->endereco);
+        $stmt->bindParam(":ba",$this->bairro);
+        $stmt->bindParam(":nu",$this->numero);
+        $stmt->bindParam(":com",$this->complemento);
+        $stmt->bindParam(":cep",$this->cep);
+        $stmt->bindParam(":em",$this->email);
+        $stmt->bindParam(":tel",$this->telefone);
+        $stmt->bindParam(":cel",$this->celular);
+        $stmt->bindParam(":se",$this->nome);
+        $stmt->bindParam(":no",$this->cpf);
+        $stmt->bindParam(":idcliente",$this->idcliente);
+
+        echo json_encode($this);
+
+//Executar a consulta e verificar se cadastrou
+if($stmt->execute()){
+    return true;
+    }
+    return false;
+
+}
+
 }
 ?>

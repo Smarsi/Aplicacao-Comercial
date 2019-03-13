@@ -79,7 +79,7 @@ else{
 //Responder que não foi encontrado.
 //Código 404 - Not Found.
 http_response_code(404);
-echo json_encode(array("mensagem"=>"Não foi possível localizar nenhum fornecedor!"));
+echo json_encode(array("mensagem"=>"Não foi possível localizar nenhum cliente!"));
 }
 
 

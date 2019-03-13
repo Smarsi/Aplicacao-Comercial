@@ -119,5 +119,93 @@ class Produtos{
     return false;
 
 }
+
+//------------------------------------APAGAR
+public function Apagar(){
+//Vamos criar uma variável para armazenar os comandos de SQL
+$query = "Delete from produtos, estoque using produtos, estoque where produtos.idproduto=:ip and estoque.idestoque=:ie";
+
+//Vamos preparar para a execução da variável.
+$stmt = $this->conexao->prepare($query);
+
+//Vamos remover qualquer caractere especial que possa estar vindo.
+$this->idproduto=htmlspecialchars(strip_tags($this->idproduto));
+$this->idestoque=htmlspecialchars(strip_tags($this->idestoque));
+
+//Vamos fazer a ligação dos parâmetros.
+$stmt->bindParam(":ip",$this->idproduto);
+$stmt->bindParam(":ie",$this->idestoque);
+
+//Vamos executar efetivamente a consulta.
+if($stmt->execute()){
+    return true;
+}
+return false;  
+        
+}
+
+// ------------------- ATUALIZAR -------------------
+
+public function Atualizar(){
+//Vamos criar a variável que armazena o comando de SQL.
+$query = "update estoque as e 
+inner join produtos as p on p.idproduto = e.idproduto
+                   set 
+                   e.quantidade=:qt,
+                   e.idfornecedor=:if,
+                   p.nomeproduto=:np,
+                   p.descricao=:dc,
+                   p.preco=:pr,
+                   p.categoria=:ct,
+                   p.img1=:i1,
+                   p.img2=:i2,
+                   p.img3=:i3,
+                   p.img4=:i4,
+                   p.idfornecedor=:if
+                   where p.idproduto=:idproduto";
+
+//Vamos preparar para a execução do comando
+$stmt = $this->conexao->prepare($query);
+
+//Vamos usar uma função para retirar 
+//todos os caracteres especiais vindos de 
+//uma página html.
+//Isso fará com que você evite a execução
+//de comandos maliciosos no banco de dados
+//comandos de sqlinject
+$this->quantidade = htmlspecialchars(strip_tags($this->quantidade));
+$this->idfornecedor = htmlspecialchars(strip_tags($this->idfornecedor));
+$this->nomeproduto = htmlspecialchars(strip_tags($this->nomeproduto));
+$this->descricao = htmlspecialchars(strip_tags($this->descricao));
+$this->preco = htmlspecialchars(strip_tags($this->preco));
+$this->categoria = htmlspecialchars(strip_tags($this->categoria));
+$this->img1 = htmlspecialchars(strip_tags($this->img1));
+$this->img2 = htmlspecialchars(strip_tags($this->img2));
+$this->img3 = htmlspecialchars(strip_tags($this->img3));
+$this->img4 = htmlspecialchars(strip_tags($this->img4));
+
+//Vamos fazer um bindParam(ligção de parâmetros) entre os dados
+        //enviados pelo usuario no navegado ou smartphone para o banco
+        //de dados
+        $stmt->bindParam(":qt",$this->quantidade);
+        $stmt->bindParam(":if",$this->idfornecedor);
+        $stmt->bindParam(":np",$this->nomeproduto);
+        $stmt->bindParam(":dc",$this->descricao);
+        $stmt->bindParam(":pr",$this->preco);
+        $stmt->bindParam(":ct",$this->categoria);
+        $stmt->bindParam(":i1",$this->img1);
+        $stmt->bindParam(":i2",$this->img2);
+        $stmt->bindParam(":i3",$this->img3);
+        $stmt->bindParam(":i4",$this->img4);
+        $stmt->bindParam(":idproduto",$this->idproduto);
+
+//Executar a consulta e verificar se cadastrou
+if($stmt->execute()){
+    return true;
+    }
+    return false;
+
+}
+
 }
 ?>

@@ -100,7 +100,7 @@ public function listarPorCpf(){
     //os campos da tabela.
 
     $linha = $stmt->fetch(PDO::FETCH_ASSOC);
-     
+
     //Vamos organizar no objeto funcionarios (funcionarios.php)
     //os dados retornados da consulta no banco de dados da tabela
     //funcionarios.
@@ -120,6 +120,12 @@ public function listarPorCpf(){
     $this->numero = $linha['numero'];
     $this->complemento = $linha['complemento'];
     $this->cep = $linha['cep'];
+
+    //Para que tudo dê certo é necessário que o retorno aqui seja da variável
+    //stmt, pois ela guarda os dados da consulta com o banco.
+    return $stmt;
+
+
 }
 
 // ------------------- LISTAR pelo ID-------------------
@@ -321,7 +327,75 @@ public function cadastrar(){
 
     }
 
+    //------------------------------------ATUALIZAR
+    public function Atualizar(){
+        //Vamos criar a variável que armazena o comando de SQL.
+        $query = "update endereco as e 
+		inner join funcionarios as f on e.idendereco = f.idendereco
+        inner join contato as c on c.idcontato = f.idcontato
+                           set 
+                           e.endereco=:en,
+                           e.bairro=:ba,
+                           e.numero=:nu,
+                           e.complemento=:com,
+                           e.cep=:cep,
+                           c.email=:em,
+                           c.telefone=:tel,
+                           c.celular=:cel,
+                           f.senha=:se,
+                           f.nome=:no,
+                           f.cpf=:cpf,
+                           f.foto=:ft
+                           where f.idfuncionario=:idfuncionario";
 
+        //Vamos preparar para a execução do comando
+        $stmt = $this->conexao->prepare($query);
+
+        //Vamos usar uma função para retirar 
+        //todos os caracteres especiais vindos de 
+        //uma página html.
+        //Isso fará com que você evite a execução
+        //de comandos maliciosos no banco de dados
+        //comandos de sqlinject
+       $this->endereco = htmlspecialchars(strip_tags($this->endereco));
+       $this->bairro = htmlspecialchars(strip_tags($this->bairro));
+       $this->numero = htmlspecialchars(strip_tags($this->numero));
+       $this->complemento = htmlspecialchars(strip_tags($this->complemento));
+       $this->cep = htmlspecialchars(strip_tags($this->cep));
+       $this->email = htmlspecialchars(strip_tags($this->email));
+       $this->telefone = htmlspecialchars(strip_tags($this->telefone));
+       $this->celular = htmlspecialchars(strip_tags($this->celular));
+       $this->senha = htmlspecialchars(strip_tags($this->senha));
+       $this->nome = htmlspecialchars(strip_tags($this->nome));
+       $this->cpf = htmlspecialchars(strip_tags($this->cpf));
+       $this->foto = htmlspecialchars(strip_tags($this->foto));
+       
+        
+        //Vamos fazer um bindParam(ligção de parâmetros) entre os dados
+        //enviados pelo usuario no navegado ou smartphone para o banco
+        //de dados
+        $stmt->bindParam(":en",$this->endereco);
+        $stmt->bindParam(":ba",$this->bairro);
+        $stmt->bindParam(":nu",$this->numero);
+        $stmt->bindParam(":com",$this->completo);
+        $stmt->bindParam(":cep",$this->cep);
+        $stmt->bindParam(":em",$this->email);
+        $stmt->bindParam(":tel",$this->telefone);
+        $stmt->bindParam(":cel",$this->celular);
+        $stmt->bindParam(":se",$this->senha);
+        $stmt->bindParam(":no",$this->nome);
+        $stmt->bindParam(":cpf",$this->cpf);
+        $stmt->bindParam(":ft",$this->foto);
+        $stmt->bindParam(":idfuncionario",$this->idfuncionario);
+
+
+        //Executar a consulta e verificar se cadastrou
+    if($stmt->execute()){
+    return true;
+    }
+    return false;
+
+    }
 
 }
 ?>
