@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName;
 public class Funcionarios {
 
 
-    @SerializedName("idFuncionario")
+    @SerializedName("idfuncionario")
     @Expose
-    private int idFuncionario;
+    private String idfuncionario;
 
     @SerializedName("email")
     @Expose
-    private  String email;
+    private String email;
 
     @SerializedName("cpf")
     @Expose
@@ -38,9 +38,9 @@ public class Funcionarios {
     @Expose
     private String endereco;
 
-    @SerializedName("numeroEndereco")
+    @SerializedName("numero")
     @Expose
-    private String numeroEndereco;
+    private String numero;
 
     @SerializedName("cep")
     @Expose
@@ -54,35 +54,38 @@ public class Funcionarios {
     @Expose
     private String complemento;
 
-    @SerializedName("foto")
+    @SerializedName("Foto")
     @Expose
     private String foto;
 
-    public Funcionarios (int idFuncionario, String email, String senha, String nome, String cpf, String telefone, String celular, String foto, String endereco,
-                         String numeroEndereco, String cep, String bairro, String complemento){
-        this.idFuncionario = idFuncionario;
+    public Funcionarios (String idfuncionario, String email, String senha, String nome, String cpf, String telefone, String celular,  String endereco,
+                         String numero, String cep, String bairro,  String complemento, String foto){
+        this.idfuncionario = idfuncionario;
         this.email = email;
         this.senha = senha;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.celular = celular;
-        this.foto = foto;
         this.endereco = endereco;
-        this.numeroEndereco = numeroEndereco;
+        this.numero = numero;
         this.cep = cep;
         this.bairro = bairro;
         this.complemento = complemento;
+
+        System.out.print(this);
+
+
     }
     public Funcionarios(){}
 
 
-    public int getIdFuncionario() {
-        return idFuncionario;
+    public String getIdFuncionario() {
+        return idfuncionario;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
+    public void setIdFuncionario(String idFuncionario) {
+        this.idfuncionario = idFuncionario;
     }
 
     public String getSenha() {
@@ -121,35 +124,32 @@ public class Funcionarios {
 
     public void setCelular(String celular) { this.celular = celular; }
 
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public void setEndereco(String endereco) { this.endereco = endereco; }
-
-    public String getEndereco(String endereco) { return endereco; }
-
-    public void setNumeroEndereco(String numeroEndereco) { this.numeroEndereco = numeroEndereco; }
-
-    public String getNumeroEndereco(String numeroEndereco) { return numeroEndereco; }
-
-    public void   setCep(String cep) { this.cep = cep; }
-
-    public String getCep(String cep) { return cep; }
-
-    public void setBairro(String bairro) { this.bairro = bairro; }
-
-    public String getBairro(String bairro) { return bairro; }
-
-    public void setComplemento(String complemento) { this.complemento = complemento; }
-
-    public String getComplemento(String complemento) { return complemento; }
+    public String getEmail() { return  email; }
 
     public void setEmail(String email) { this.email = email; }
 
-    public String getEmail(String email) { return email; }
+    public String getEndereco() { return  endereco;}
+
+    public void setEndereco(String endereco) { this.endereco = endereco; }
+
+    public String getNumero() { return numero; }
+
+    public void setNumero(String numero) { this.numero = numero; }
+
+    public String getCep() { return cep; }
+
+    public void setCep(String cep) { this.cep = cep; }
+
+    public String getBairro(){ return  bairro; }
+
+    public void  setBairro(String bairro ) { this.bairro = bairro; }
+
+    public String getComplemento() { return  complemento;}
+
+    public void setComplemento(String complemento ) {this.complemento = complemento; }
+
+    public String getFoto() { return foto;}
+
+    public void  setFoto(String foto) {this.foto = foto;}
+
 }

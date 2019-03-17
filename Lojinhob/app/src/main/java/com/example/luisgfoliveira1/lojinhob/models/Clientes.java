@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class Clientes {
 
 
-    @SerializedName("idCliente")
-    @Expose
-    private int idCliente;
+
 
     @SerializedName("email")
     @Expose
@@ -34,9 +32,9 @@ public class Clientes {
     @Expose
     private String endereco;
 
-    @SerializedName("numeroEndereco")
+    @SerializedName("numero")
     @Expose
-    private String numeroEndereco;
+    private String numero;
 
     @SerializedName("cep")
     @Expose
@@ -50,35 +48,21 @@ public class Clientes {
     @Expose
     private String complemento;
 
-    @SerializedName("foto")
-    @Expose
-    private String foto;
-
-    public Clientes (int idCliente, String nome, String cpf, String telefone, String celular, String foto, String endereco,
-                         String numeroEndereco, String cep, String bairro, String complemento, String email){
-        this.idCliente = idCliente;
+    public Clientes (  String nome, String cpf, String telefone, String celular, String endereco,
+                         String numero, String cep, String bairro, String complemento, String email){
         this.email = email;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.celular = celular;
-        this.foto = foto;
         this.endereco = endereco;
-        this.numeroEndereco = numeroEndereco;
+        this.numero = numero;
         this.cep = cep;
         this.bairro = bairro;
         this.complemento = complemento;
     }
     public Clientes(){}
 
-
-    public int getidCliente() {
-        return idCliente;
-    }
-
-    public void setidCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
 
     public String getNome() {
         return nome;
@@ -108,35 +92,29 @@ public class Clientes {
 
     public void setCelular(String celular) { this.celular = celular; }
 
-    public String getFoto() {
-        return foto;
-    }
+    public String getEmail() { return  email; }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
+    public void  setEmail(String email) { this.email = email; }
 
-    public void setEndereco(String endereco) { this.endereco = endereco; }
+    public String getEndereco() { return  endereco; }
 
-    public String getEndereco(String endereco) { return endereco; }
+    public void  setEndereco(String endereco) { this.endereco = endereco; }
 
-    public void setNumeroEndereco(String numeroEndereco) { this.numeroEndereco = numeroEndereco; }
+    public String getNumero() { return  numero; }
 
-    public String getNumeroEndereco(String numeroEndereco) { return numeroEndereco; }
+    public void  setNumero(String numero) { this.numero = numero; }
 
-    public void   setCep(String cep) { this.cep = cep; }
+    public String getCep() { return  cep; }
 
-    public String getCep(String cep) { return cep; }
+    public void setCep (String cep){ this.cep = cep; }
+
+    public String getBairro() { return  bairro; }
 
     public void setBairro(String bairro) { this.bairro = bairro; }
 
-    public String getBairro(String bairro) { return bairro; }
+    public String getComplemento() { return  complemento; }
 
-    public void setComplemento(String complemento) { this.complemento = complemento; }
+    public void setComplemento(String complemento ) {this.complemento = complemento; }
 
-    public String getComplemento(String complemento) { return complemento; }
 
-    public void setEmail(String email) { this.email = email; }
-
-    public String getEmail(String email) { return email; }
 }

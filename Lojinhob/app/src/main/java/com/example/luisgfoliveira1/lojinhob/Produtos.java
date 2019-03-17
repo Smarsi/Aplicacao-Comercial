@@ -122,6 +122,17 @@ public class Produtos extends AppCompatActivity {
                         Intent cad = new Intent(Produtos.this, CadastroCliente.class);
                         startActivity(cad);
                     }
+                    case R.id.cadastrofun: {
+                        Intent cadfun = new Intent(Produtos.this, CadastroFuncionario.class);
+                        startActivity(cadfun);
+                        break;
+                    }
+                    case  R.id.cadastroPro: {
+                        Intent cadpro = new Intent(Produtos.this, CadastroProdutos.class);
+                        startActivity(cadpro);
+                    }
+
+
 
                     break;
                     default:

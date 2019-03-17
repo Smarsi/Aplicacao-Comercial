@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroCliente"
+    tools:context=".CadastroFuncionario"
     android:orientation="vertical"
-    android:id="@+id/telaCadastro"
-    tools:openDrawer="start"
-    >
-
+    android:id="@+id/telaCadastroFun"
+    tools:openDrawer="start">
 
 
     <ScrollView
@@ -21,11 +19,11 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/cadNome"
+                android:id="@+id/funNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="65dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:ems="10"
@@ -36,10 +34,10 @@
 
 
             <EditText
-                android:id="@+id/cadCpf"
+                android:id="@+id/funCpf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/radioSexo"
+                android:layout_below="@+id/funNome"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -50,10 +48,10 @@
 
 
             <EditText
-                android:id="@+id/cadEmail"
+                android:id="@+id/funEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cadCpf"
+                android:layout_below="@+id/funCpf"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -63,7 +61,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/cadTelefone"
+                android:id="@+id/funTelefone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -71,16 +69,16 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:ems="10"
-                android:layout_below="@+id/cadEmail"
+                android:layout_below="@+id/funEmail"
                 android:hint=" Telefone"
                 android:inputType="number"
                 />
 
             <EditText
-                android:id="@+id/cadCelular"
+                android:id="@+id/funCelular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cadTelefone"
+                android:layout_below="@id/funTelefone"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -91,10 +89,10 @@
 
 
             <EditText
-                android:id="@+id/cadEndereco"
+                android:id="@+id/funEndereco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cadCelular"
+                android:layout_below="@id/funCelular"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -104,10 +102,10 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/cadBairro"
+                android:id="@+id/funBairro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cadEndereco"
+                android:layout_below="@id/funEndereco"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -117,10 +115,10 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/cadCep"
+                android:id="@+id/funCep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cadBairro"
+                android:layout_below="@id/funBairro"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -130,7 +128,7 @@
                 android:inputType="number" />
 
             <EditText
-                android:id="@+id/cadNumeroEnd"
+                android:id="@+id/funNumero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -140,11 +138,11 @@
                 android:ems="10"
                 android:hint=" Numero do Endereço"
                 android:inputType="number"
-                android:layout_below="@id/cadCep"
+                android:layout_below="@id/funCep"
                 />
 
             <EditText
-                android:id="@+id/cadComplemento"
+                android:id="@+id/funComplemento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -154,10 +152,11 @@
                 android:ems="10"
                 android:hint=" Complemento"
                 android:inputType="text"
-                android:layout_below="@id/cadNumeroEnd"
+                android:layout_below="@id/funNumero"
                 />
-            <Button
-                android:id="@+id/btncadCadastrar"
+
+            <EditText
+                android:id="@+id/funSenha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -165,22 +164,48 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:ems="10"
-                android:hint=" Cadastrar Cliente"
+                android:hint=" Senha"
+                android:inputType="textPassword"
+                android:layout_below="@id/funComplemento"
+                />
+            <EditText
+                android:id="@+id/funFoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint=" Caminho da foto"
+                android:inputType="text"
+                android:layout_below="@id/funSenha"
+                />
+            <Button
+                android:id="@+id/btncadFunCadastrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint=" Cadastrar Funcionario"
                 android:inputType="textPersonName"
-                android:layout_below="@id/cadComplemento"/>
+                android:layout_below="@id/funFoto"/>
 
         </LinearLayout>
 
     </ScrollView>
+       <include layout="@layout/toolbar"/>
+       <android.support.design.widget.NavigationView
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:id="@+id/nav_view"
+           app:headerLayout="@layout/cabecalho"
+           app:menu="@menu/lateral"
+           android:layout_gravity="start"
 
-    <include layout="@layout/toolbar"/>
-    <android.support.design.widget.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/nav_view"
-        app:headerLayout="@layout/cabecalho"
-        app:menu="@menu/lateral"
-        android:layout_gravity="start"
+           />
 
-        />
 </android.support.v4.widget.DrawerLayout>

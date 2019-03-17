@@ -39,9 +39,17 @@ public class CadastroCliente extends AppCompatActivity {
     NavigationView navigationView;
 
     ServicoClientes sc;
-    EditText cadEmail, cadNome, cadcpf, cadTelefone, cadCelular,
-            cadEndereco, cadNumeroEnd, cadCep, cadBairro, cadCompplemento;
-    Button btnCadCadastro;
+    EditText cadEmail;
+    EditText cadNome;
+    EditText cadcpf;
+    EditText cadTelefone;
+    EditText cadCelular;
+    EditText cadEndereco;
+    EditText cadNumeroEnd;
+    EditText cadCep;
+    EditText cadBairro;
+    EditText cadCompplemento;
+    Button btncadCadastrar;
 
 
     @Override
@@ -87,7 +95,7 @@ public class CadastroCliente extends AppCompatActivity {
                         break;
                     }
                     case R.id.carrinho: {
-                        Intent car = new Intent(CadastroCliente.this, Carrinho.class);
+                        Intent car = new Intent(CadastroCliente.this, CarrinhoProduto.class);
                         startActivity(car);
                         break;
                     }
@@ -95,6 +103,17 @@ public class CadastroCliente extends AppCompatActivity {
                         Intent cad = new Intent(CadastroCliente.this, MainActivity.class);
                         startActivity(cad);
                     }
+                    case R.id.cadastrofun: {
+                        Intent cadfun = new Intent(CadastroCliente.this, CadastroFuncionario.class);
+                        startActivity(cadfun);
+                        break;
+                    }
+                    case  R.id.cadastroPro: {
+                        Intent cadpro = new Intent(CadastroCliente.this, CadastroProdutos.class);
+                        startActivity(cadpro);
+                    }
+
+
 
 
                     break;
@@ -114,44 +133,47 @@ public class CadastroCliente extends AppCompatActivity {
 
          */
         cadNome = findViewById(R.id.cadNome);
-        cadEmail = findViewById(R.id.cadEmail);
         cadcpf = findViewById(R.id.cadCpf);
+        cadEmail = findViewById(R.id.cadEmail);
         cadTelefone = findViewById(R.id.cadTelefone);
         cadCelular = findViewById(R.id.cadCelular);
         cadEndereco = findViewById(R.id.cadEndereco);
-        cadNumeroEnd = findViewById(R.id.cadNumeroEnd);
         cadBairro = findViewById(R.id.cadBairro);
+        cadNumeroEnd = findViewById(R.id.cadNumeroEnd);
+        cadCep = findViewById(R.id.cadCep);
         cadCompplemento = findViewById(R.id.cadComplemento);
-        btnCadCadastro = findViewById(R.id.btncadCadastrar);
+        btncadCadastrar = findViewById(R.id.btncadCadastrar);
 
         sc = Utilitario.obterClientes();
 
-        btnCadCadastro.setOnClickListener(new View.OnClickListener() {
+        btncadCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    Clientes us = new Clientes();
-                    us.setEmail(cadEmail.getText().toString());
-                    us.setNome(cadNome.getText().toString());
-                    us.setCpf(cadcpf.getText().toString());
-                    us.setTelefone(cadTelefone.getText().toString());
-                    us.setCelular(cadCelular.getText().toString());
-                    us.setEndereco(cadEndereco.getText().toString());
-                    us.setNumeroEndereco(cadNumeroEnd.getText().toString());
-                    us.setCep(cadCep.getText().toString());
-                    us.setBairro(cadBairro.getText().toString());
-                    us.setComplemento(cadCompplemento.getText().toString());
-                    cadastrarCliente(us);
+                    Clientes cli = new Clientes();
+                    cli.setNome(cadNome.getText().toString());
+                    cli.setCpf(cadcpf.getText().toString());
+                    cli.setEmail(cadEmail.getText().toString());
+                    cli.setTelefone(cadTelefone.getText().toString());
+                    cli.setCelular(cadCelular.getText().toString());
+                    cli.setEndereco(cadEndereco.getText().toString());
+                    cli.setBairro(cadBairro.getText().toString());
+                    cli.setCep(cadCep.getText().toString());
+                    cli.setNumero(cadNumeroEnd.getText().toString());
+                    cli.setComplemento(cadCompplemento.getText().toString());
+                    cadastrarClientes(cli);
+                    System.out.print(cli);
+
                     //Limpar as caixas
                     cadEmail.setText("");
-                    cadNome.setText("");
                     cadcpf.setText("");
+                    cadNome.setText("");
                     cadTelefone.setText("");
                     cadCelular.setText("");
                     cadEndereco.setText("");
-                    cadNumeroEnd.setText("");
                     cadBairro.setText("");
                     cadCep.setText("");
+                    cadNumeroEnd.setText("");
                     cadCompplemento.setText("");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -161,8 +183,8 @@ public class CadastroCliente extends AppCompatActivity {
     }
 
 
-    public void cadastrarCliente(Clientes us) {
-        Call<Clientes> call = sc.addClientes(us);
+    public void cadastrarClientes (Clientes cli) {
+        Call<Clientes> call = sc.addClientes(cli);
         call.enqueue(new Callback<Clientes>() {
             @Override
             public void onResponse(Call<Clientes> call, Response<Clientes> response) {

@@ -60,7 +60,7 @@ public class UltimasCompras extends AppCompatActivity {
                         break;
                     }
                     case R.id.carrinho: {
-                        Intent car = new Intent(UltimasCompras.this, Carrinho.class);
+                        Intent car = new Intent(UltimasCompras.this, CarrinhoProduto.class);
                         startActivity(car);
                         break;
                     }
@@ -68,6 +68,16 @@ public class UltimasCompras extends AppCompatActivity {
                         Intent cad = new Intent(UltimasCompras.this, CadastroCliente.class);
                         startActivity(cad);
                     }
+                    case R.id.cadastrofun: {
+                        Intent cadfun = new Intent(UltimasCompras.this, CadastroFuncionario.class);
+                        startActivity(cadfun);
+                    }
+                    case  R.id.cadastroPro: {
+                        Intent cadpro = new Intent(UltimasCompras.this, CadastroProdutos.class);
+                        startActivity(cadpro);
+                    }
+
+
 
                     break;
                     default:

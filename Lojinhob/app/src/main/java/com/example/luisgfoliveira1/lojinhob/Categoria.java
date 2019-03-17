@@ -74,6 +74,18 @@ public class Categoria extends AppCompatActivity {
                         Intent cad = new Intent(Categoria.this, CadastroCliente.class);
                         startActivity(cad);
                     }
+                    case R.id.cadastrofun: {
+                        Intent cadfun = new Intent(Categoria.this, CadastroFuncionario.class);
+                        startActivity(cadfun);
+                        break;
+
+                    }
+                    case  R.id.cadastroPro: {
+                        Intent cadpro = new Intent(Categoria.this, MainActivity.class);
+                        startActivity(cadpro);
+                    }
+
+                    break;
                     default:
                         break;
                 }

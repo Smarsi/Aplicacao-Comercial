@@ -83,6 +83,10 @@ public class Login extends AppCompatActivity {
         });
     }
 
+
+
+
+
     void efetuarLogin(Funcionarios fun){
         Call<Funcionarios> call = sf.login(fun);
         call.enqueue(new Callback<Funcionarios>() {
@@ -101,16 +105,18 @@ public class Login extends AppCompatActivity {
                     sp.edit().putBoolean("apLogado", true).commit(); // islogin is a boolean value of your login statu
 
                     String nome = response.body().getNome();
+                    String email = response.body().getEmail();
                     String id=String.valueOf(response.body().getIdFuncionario());
                     String cpf = response.body().getCpf();
-                    String tel = response.body().getTelefone();
-                    String foto = response.body().getFoto();
+                    String end = response.body().getEndereco();
+
+
 
                     sp.edit().putString("knome",nome).commit();
+                    sp.edit().putString("kemail",email).commit();
                     sp.edit().putString("kid",id).commit();
                     sp.edit().putString("kcpf",cpf).commit();
-                    sp.edit().putString("ktel",tel).commit();
-                    sp.edit().putString("kfoto",foto).commit();
+                    sp.edit().putString("kend",end).commit();
 
 
                     Intent principal = new Intent(Login.this,MainActivity.class);
@@ -134,6 +140,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
 
 
         /*btnLogin = findViewById(R.id.btnlogin);

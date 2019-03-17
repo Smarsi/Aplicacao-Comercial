@@ -1,5 +1,6 @@
 package com.example.luisgfoliveira1.lojinhob.servico;
 
+import com.example.luisgfoliveira1.lojinhob.models.CadFuncionarios;
 import com.example.luisgfoliveira1.lojinhob.models.Funcionarios;
 
 import java.util.List;
@@ -16,11 +17,10 @@ public interface ServicoFuncionarios {
     @GET("jsonfun/listar.php")
     Call<List<Funcionarios>> getFuncionarios();
 
-    @POST("jsonfun/cadastrar.php")
-    Call<Funcionarios> addFuncionarios(@Body Funcionarios funcionarios);
+
 
     @POST("jsonfun/login.php")
-    Call<Funcionarios> login(@Body Funcionarios usuarios);
+    Call<Funcionarios> login(@Body Funcionarios funcionarios);
 
 
     @PUT("jsonfun/")

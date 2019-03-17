@@ -59,7 +59,7 @@
         <activity
             android:name=".Detalhes"
             android:label="Detalhes Do Pedido"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -68,6 +68,18 @@
         <activity
             android:name=".CadastroCliente"
             android:label="Cadastro do Cliente"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".CadastroFuncionario"
+            android:label="Cadastro Funcionario"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".CadastroProdutos"
+            android:label="Cadastro Produto"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".CarrinhoProduto"
+            android:label="Carrinho "
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             ></activity>
     </application>

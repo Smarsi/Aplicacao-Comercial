@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     case R.id.carrinho: {
-                        Intent car = new Intent(MainActivity.this, Carrinho.class);
+                        Intent car = new Intent(MainActivity.this, CarrinhoProduto.class);
                         startActivity(car);
                         break;
                     }
@@ -121,6 +121,17 @@ public class MainActivity extends AppCompatActivity {
                         Intent cad = new Intent(MainActivity.this, CadastroCliente.class);
                         startActivity(cad);
                     }
+                    case R.id.cadastrofun: {
+                        Intent cadfun = new Intent(MainActivity.this, CadastroFuncionario.class);
+                        startActivity(cadfun);
+                        break;
+                    }
+                    case  R.id.cadastroPro: {
+                        Intent cadpro = new Intent(MainActivity.this, CadastroProdutos.class);
+                        startActivity(cadpro);
+                    }
+
+
 
                     break;
                     default:

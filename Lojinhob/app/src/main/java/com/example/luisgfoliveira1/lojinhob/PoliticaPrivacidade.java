@@ -60,7 +60,7 @@ public class PoliticaPrivacidade extends AppCompatActivity {
                         break;
                     }
                     case R.id.carrinho: {
-                        Intent car = new Intent(PoliticaPrivacidade.this, Carrinho.class);
+                        Intent car = new Intent(PoliticaPrivacidade.this, CarrinhoProduto.class);
                         startActivity(car);
                         break;
 
@@ -69,6 +69,17 @@ public class PoliticaPrivacidade extends AppCompatActivity {
                         Intent cad = new Intent(PoliticaPrivacidade.this, CadastroCliente.class);
                         startActivity(cad);
                     }
+                    case R.id.cadastrofun: {
+                        Intent cadfun = new Intent(PoliticaPrivacidade.this, CadastroFuncionario.class);
+                        startActivity(cadfun);
+                        break;
+                    }
+                    case  R.id.cadastroPro: {
+                        Intent cadpro = new Intent(PoliticaPrivacidade.this, CadastroProdutos.class);
+                        startActivity(cadpro);
+                    }
+
+
 
                     break;
                     default:

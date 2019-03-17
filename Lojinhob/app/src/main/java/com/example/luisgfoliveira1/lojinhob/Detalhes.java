@@ -27,8 +27,11 @@ public class Detalhes extends AppCompatActivity {
     TextView txtDetalhesDescricao;
     TextView txtDetalhesPreco;
     TextView txtDetalhesIdProduto;
+    ImageView imageViewProduto;
     Button btnCarrinho;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +56,7 @@ public class Detalhes extends AppCompatActivity {
         btnCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent car = new Intent(Detalhes.this, Carrinho.class);
+                Intent car = new Intent(Detalhes.this, CarrinhoProduto.class);
                 car.putExtra("carNome", txtDetalhesNomeProduto.getText());
                 car.putExtra("carPreco", txtDetalhesPreco.getText());
                 car.putExtra("carIdPro", txtDetalhesIdProduto.getText());
@@ -61,7 +64,7 @@ public class Detalhes extends AppCompatActivity {
             }
         });
 
-       /* String img1 = getIntent().getExtras().get("imagem1").toString();
+        String img1 = getIntent().getExtras().get("imagem1").toString();
         String img2 = getIntent().getExtras().get("imagem2").toString();
         String img3 = getIntent().getExtras().get("imagem3").toString();
         String img4 = getIntent().getExtras().get("imagem4").toString();
@@ -71,9 +74,25 @@ public class Detalhes extends AppCompatActivity {
                 img2,
                 img3,
                 img4
-        };*/
-
+        };
+/*
+        Ligação entre o viewpager que está em xml do
+        layout com o objeto viewPager do java
+        para escrever comandos de execução.
+         */
         final ViewPager viewPager = findViewById(R.id.view_pager);
+        /*
+        Instância da classe ViewPagerAdapter e passagem
+        do context(tela que abre o pageviewer) e o
+        array de imagens que será exibido
+         */
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this, imagens);
+
+        /*
+        Vincular a adaptação das imagens vindas da api
+        com o viewpager da tela detalhes.
+         */
+        viewPager.setAdapter(adapter);
 
 
           }

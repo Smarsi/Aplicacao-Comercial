@@ -11,10 +11,13 @@
         <item android:id="@+id/regulamento" android:title="Regulamento" android:icon="@drawable/regulamento"/>
         <item android:id="@+id/privacidade" android:title="Politicas de Privacidade" android:icon="@drawable/politica"/>
         <item android:id="@+id/cadastro" android:title="Cadastro Cliente" android:icon="@drawable/cadastro"/>
+        <item android:id="@+id/cadastrofun" android:title="cadastro Funcionario" android:icon="@drawable/funcionario"/>
+        <item android:id="@+id/cadastroPro" android:title="cadastro Produto" android:icon="@drawable/ult_compras"/>
+        <item android:id="@+id/carrinho" android:title="Carrinho" android:icon="@drawable/carrinho"/>
     </group>
 
     <group android:id="@+id/logout">
-        <item android:id="@+id/carrinho" android:title="Carrinho" android:icon="@drawable/carrinho"/>
+
         <item android:id="@+id/sair" android:title="Sair" android:icon="@drawable/exit"/>
     </group>
 </menu>

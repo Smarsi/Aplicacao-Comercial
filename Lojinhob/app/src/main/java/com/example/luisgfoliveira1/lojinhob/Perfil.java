@@ -23,7 +23,10 @@ public class Perfil extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    TextView nome,email,telefone,cpf;
+    TextView nome;
+    TextView email;
+    TextView cpf;
+    TextView endereco;
     TextView idFun;
     Button btnUltimas;
 
@@ -39,10 +42,11 @@ public class Perfil extends AppCompatActivity {
         //-------- Pegando as informações que estão nas
         //-------- preferências do telefone
 
-        nome = findViewById(R.id.PerNome);
-        email = findViewById(R.id.PerEmail);
-        cpf = findViewById(R.id.PerCpf);
-        idFun = findViewById(R.id.PerIdFuncionario);
+        nome = findViewById(R.id.perNome);
+        email = findViewById(R.id.perEmail);
+        endereco = findViewById(R.id.perEnderco);
+        cpf = findViewById(R.id.perCpf);
+        idFun = findViewById(R.id.perIdFuncionario);
 
         /*
         Vamos fazer a instância da classe SharedPreferences
@@ -57,7 +61,13 @@ public class Perfil extends AppCompatActivity {
         nome.setText(sp.getString("knome",""));
         email.setText(sp.getString("kemail",""));
         cpf.setText(sp.getString("kcpf",""));
+        endereco.setText(sp.getString("ktel",""));
         idFun.setText(sp.getString("kid",""));
+
+
+
+
+
 
 
         drawerLayout = findViewById(R.id.telaPerfil);
@@ -66,7 +76,6 @@ public class Perfil extends AppCompatActivity {
                         R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
 
         navigationView = findViewById(R.id.nav_view);
 
@@ -97,7 +106,7 @@ public class Perfil extends AppCompatActivity {
                     }
                     break;
                     case R.id.carrinho: {
-                        Intent pol = new Intent(Perfil.this, Carrinho.class);
+                        Intent pol = new Intent(Perfil.this, CarrinhoProduto.class);
                         startActivity(pol);
                     }
                     break;
@@ -105,6 +114,17 @@ public class Perfil extends AppCompatActivity {
                         Intent pol = new Intent(Perfil.this, CadastroCliente.class);
                         startActivity(pol);
                     }
+                    case R.id.cadastrofun: {
+                        Intent cad = new Intent(Perfil.this, CadastroFuncionario.class);
+                        startActivity(cad);
+                        break;
+                    }
+                    case  R.id.cadastroPro: {
+                        Intent cadpro = new Intent(Perfil.this, CadastroProdutos.class);
+                        startActivity(cadpro);
+                    }
+
+
                     break;
                     default:
                         break;
@@ -125,5 +145,9 @@ public class Perfil extends AppCompatActivity {
             }
 
         });
+
+
     }
+
+
 }

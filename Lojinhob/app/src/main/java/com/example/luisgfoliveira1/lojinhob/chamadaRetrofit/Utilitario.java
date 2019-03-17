@@ -1,12 +1,14 @@
 package com.example.luisgfoliveira1.lojinhob.chamadaRetrofit;
 
+import com.example.luisgfoliveira1.lojinhob.servico.ServicoCadFuncionarios;
 import com.example.luisgfoliveira1.lojinhob.servico.ServicoClientes;
 import com.example.luisgfoliveira1.lojinhob.servico.ServicoFuncionarios;
 import com.example.luisgfoliveira1.lojinhob.servico.ServicoPedidos;
 import com.example.luisgfoliveira1.lojinhob.servico.ServicoProduto;
+import com.example.luisgfoliveira1.lojinhob.servico.ServicoProdutos;
 
 
-    public class Utilitario {
+public class Utilitario {
         public Utilitario(){}
 
         /*
@@ -35,6 +37,12 @@ import com.example.luisgfoliveira1.lojinhob.servico.ServicoProduto;
         }
         public static ServicoClientes obterClientes(){
             return  ChamadaRetrofit.getClient(caminhoURL).create(ServicoClientes.class);
+        }
+        public static ServicoProdutos obeterCadProdutos(){
+            return ChamadaRetrofit.getClient(caminhoURL).create(ServicoProdutos.class);
+        }
+        public static ServicoCadFuncionarios obterCadFuncionarios(){
+            return  ChamadaRetrofit.getClient(caminhoURL).create(ServicoCadFuncionarios.class);
         }
 
     }

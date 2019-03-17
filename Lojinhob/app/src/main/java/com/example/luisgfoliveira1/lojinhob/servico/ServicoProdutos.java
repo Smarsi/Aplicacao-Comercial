@@ -1,7 +1,7 @@
 package com.example.luisgfoliveira1.lojinhob.servico;
 
 import com.example.luisgfoliveira1.lojinhob.Produtos;
-import com.example.luisgfoliveira1.lojinhob.models.ListaProduto;
+import com.example.luisgfoliveira1.lojinhob.models.CadProdutos;
 import com.example.luisgfoliveira1.lojinhob.models.Produto;
 
 import java.util.List;
@@ -11,15 +11,12 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-public interface ServicoProduto {
+public interface ServicoProdutos {
 
     @GET("jsonprod/listar.php")
     Call<List<Produtos>> getProdutos();
 
-    @GET("jsonprod/listar.php")
-    Call<ListaProduto> getTodosProdutos();
-
     @POST("jsonprod/cadastrar.php")
-    Call<Produtos> addProdutos(@Body Produto produto);
+    Call<CadProdutos> addCadProdutos(@Body CadProdutos produto);
 
 }

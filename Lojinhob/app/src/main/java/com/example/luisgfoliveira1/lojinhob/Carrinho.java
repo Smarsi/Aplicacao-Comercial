@@ -38,12 +38,12 @@ public class Carrinho extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        idFun = findViewById(R.id.carIdFun);
-        idPro = findViewById(R.id.carIdProduto);
-        nomeProduto = findViewById(R.id.carNomeProduto);
-        preco = findViewById(R.id.carPreco);
-        precoTotal = findViewById(R.id.carPrecoTotal);
-        quantidade = findViewById(R.id.carQuantidade);
+//        idFun = findViewById(R.id.carIdFun);
+//        idPro = findViewById(R.id.carIdProduto);
+//        nomeProduto = findViewById(R.id.carNomeProduto);
+//        preco = findViewById(R.id.carPreco);
+//        precoTotal = findViewById(R.id.carPrecoTotal);
+//        quantidade = findViewById(R.id.carQuantidade);
         /*
         Vamos capturar o id do usuario que esta nas preferencias do
         telefone. Portanto iremos fazer  uma instância da classe
@@ -56,26 +56,25 @@ public class Carrinho extends AppCompatActivity {
 
         idPro.setText("");
         idPro.append("Código do Produto");
-        idPro.append(getIntent().getExtras().get("carIdPro").toString());
+
 
         nomeProduto.setText("");
         nomeProduto.append("Nome do Produto");
-        nomeProduto.append(getIntent().getExtras().get("carNome").toString());
+
 
         preco.setText("");
 
-        preco.append(getIntent().getExtras().get("carPreco").toString());
 
         quantidade.setText("1");
 
-        calculoTotal = Double.parseDouble(quantidade.getText().toString()) *
-                Double.parseDouble(preco.getText().toString());
+
+
 
         precoTotal.setText("");
         precoTotal.setText("R$ " + String.valueOf(calculoTotal));
 
 
-        sb = findViewById(R.id.seekBar);
+        //sb = findViewById(R.id.seekBar);
 
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -99,7 +98,6 @@ public class Carrinho extends AppCompatActivity {
 
             }
         });
-/*
 
         drawerLayout = findViewById(R.id.telaCarrinho);
 
@@ -145,6 +143,17 @@ public class Carrinho extends AppCompatActivity {
                         Intent cad = new Intent(Carrinho.this, CadastroCliente.class);
                         startActivity(cad);
                     }
+                    case R.id.cadastrofun: {
+                        Intent cadfun = new Intent(Carrinho.this, CadastroFuncionario.class);
+                        startActivity(cadfun);
+                        break;
+                    }
+                    case  R.id.cadastroPro: {
+                        Intent cadpro = new Intent(Carrinho.this, MainActivity.class);
+                        startActivity(cadpro);
+                    }
+
+
 
                     break;
                     default:
@@ -155,7 +164,6 @@ public class Carrinho extends AppCompatActivity {
             }
         });
 
-*/
 
 
 

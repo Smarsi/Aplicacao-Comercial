@@ -3,10 +3,7 @@ package com.example.luisgfoliveira1.lojinhob.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Produto {
-    @SerializedName("idproduto")
-    @Expose
-    private int idProduto;
+public class CadProdutos {
 
     @SerializedName("nomeproduto")
     @Expose
@@ -48,11 +45,10 @@ public class Produto {
     @Expose
     private String idfornecedor;
 
-    public Produto (){
+    public CadProdutos(String idfornecedor, String nomeproduto, String quantidade,
+                       String descricao, String categoria, String preco, String img1,
+                       String img2, String img3, String img4){
 
-    }
-    public Produto(int idProduto, String idfornecedor, String nomeproduto, String quantidade, String descricao, String categoria, String preco, String img1, String img2, String img3, String img4) {
-        this.idProduto = idProduto;
         this.idfornecedor = idfornecedor;
         this.nomeproduto = nomeproduto;
         this.descricao = descricao;
@@ -64,14 +60,8 @@ public class Produto {
         this.img3 = img3;
         this.img4 = img4;
     }
+    public CadProdutos(){}
 
-    public int getIdProduto() {
-        return idProduto;
-    }
-
-    public void setIdProduto(int idProduto) {
-        this.idProduto = idProduto;
-    }
 
     public String getIdfornecedor() { return idfornecedor; }
 
@@ -141,3 +131,4 @@ public class Produto {
         this.img4 = img4;
     }
 }
+
